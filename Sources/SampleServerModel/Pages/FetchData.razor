@@ -11,11 +11,12 @@
 
 <p>This component demonstrates fetching data from a service.</p>
 
-<DataTable T="@MessageModel" GetData="@GetGridDataAsync">
-    <TextTableColumn Header="BedrNaam" Expression="Bedrijfsnaam"/>
-    <TextTableColumn Header="Adres" Expression="Adres"/>
-</DataTable>
-
+<div @key="this">
+    <DataTable T="@MessageModel" GetData="@GetGridDataAsync">
+        <TextTableColumn Header="BedrNaam" Expression="Bedrijfsnaam"/>
+        <TextTableColumn Header="Adres" Expression="Adres"/>
+    </DataTable>
+</div>
 @code{
 
     private async Task<GetDataCallbackResultModel> GetGridDataAsync(GetDataCallbackArgumentsModel data, CancellationToken cancellationToken)
