@@ -1,0 +1,46 @@
+﻿@page "/fetchdata"
+
+@using SampleServerModel.Data
+@using SampleServerModel.Model
+@using ControlLib.DataTable
+@using ControlLib.DataTable.Models
+@using System.Threading
+@inject WeatherForecastService ForecastService
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+<DataTable T="@MessageModel" GetData="@GetGridDataAsync">
+    <TextTableColumn Header="BedrNaam" Expression="Bedrijfsnaam"/>
+    <TextTableColumn Header="Adres" Expression="Adres"/>
+</DataTable>
+
+@code{
+
+    private async Task<GetDataCallbackResultModel> GetGridDataAsync(GetDataCallbackArgumentsModel data, CancellationToken cancellationToken)
+    {
+        var result = new GetDataCallbackResultModel();
+
+        var items = new List<MessageModel>();
+
+        for (int i = 0; i < data.Take; i++)
+        {
+            items.Add(new MessageModel
+                      {
+                          Count = i + data.Skip,
+                          Message = "Item #" + i + data.Skip
+                      });
+        }
+
+        Console.WriteLine("Generating {0} items", data.Take);
+
+        result.Data = items.ToArray();
+        result.RecordsTotal = 1_000_000;
+        result.RecordsFiltered = 1_000_000;
+
+        return result;
+    }
+
+
+}

@@ -1,0 +1,1 @@
+//# sourceMappingURL=IGetDataCallbackResultModel.js.map

@@ -1,0 +1,23 @@
+@typeparam T
+
+@{
+
+    //@inherits LayoutComponentBase
+    var errorMessage = GetErrorMessage();
+}
+
+@if (string.IsNullOrWhiteSpace(errorMessage))
+{
+    <table @ref="@_tableRef">
+        <CascadingValue Value="@AsInterface">
+            @Columns
+        </CascadingValue>
+    </table>
+}
+else
+{
+    <p>foutje:</p>
+    <pre>
+@errorMessage
+</pre>
+}
